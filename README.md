@@ -1,1 +1,1 @@
-# mestint_23_24_tavasz
+# Mesterséges intelligencia gy. 2023/24/2
