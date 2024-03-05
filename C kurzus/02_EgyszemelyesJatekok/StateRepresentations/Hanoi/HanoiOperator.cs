@@ -25,7 +25,7 @@ namespace _02_EgyszemelyesJatekok.StateRepresentations.Hanoi
 
             HanoiState newState = state.Clone() as HanoiState;
 
-            newState.Discs[GetFromIndex(state)] = To;
+            newState.Discs[GetFromIndex(newState)] = To;
 
             return newState;
         }
