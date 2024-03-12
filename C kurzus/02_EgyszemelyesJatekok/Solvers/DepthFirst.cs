@@ -10,7 +10,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
     public class DepthFirst : Solver
     {
         // HF: szélességi keresés megírása (BreadthFirst)
-        // 1. Ezt kell megváltoztatni
+        // 1. Ennek a típusát meg kell megváltoztatni másik adatszerkezetre
         public Stack<Node> OpenNodes { get; set; } = new Stack<Node>();
         public List<Node> ClosedNodes { get; set; } = new List<Node>();
 
@@ -50,7 +50,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
                 // Mivel kiválasztottuk kiterjesztésre, ezért átrakjuk a zártak közé.
                 ClosedNodes.Add(CurrentNode);
 
-                // Ide az elágazás
+                // Ide kerül az elágazás BreadthFirst esetén
 
                 // Kiterjesztés
                 Operator selectedOperator = SelectOperator();
@@ -58,7 +58,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
                 {
                     State newState = selectedOperator.Apply(CurrentNode.State);
                     Node newNode = new Node(newState, CurrentNode);
-                    // 2. Szélességi esetén: Belsp ciklus elé kerül és nem a newNode-ot vizsgáljuk, hanem CurrentNode-t
+                    // 2. Szélességi esetén: Belső ciklus elé kerül és nem a newNode-ot vizsgáljuk, hanem CurrentNode-t
                     if (newNode.IsTargetNode())
                     {
                         Path = newNode;
