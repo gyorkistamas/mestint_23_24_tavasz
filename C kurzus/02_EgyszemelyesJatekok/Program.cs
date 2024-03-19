@@ -8,9 +8,9 @@ namespace _02_EgyszemelyesJatekok
     {
         static void Main(string[] args)
         {
-            Solver solver = new DepthFirst(
+            Solver solver = new BackTrackWithBranchLimit(
                 new HanoiOperatorGenerator(),
-                new HanoiState()
+                new HanoiState(), 50
                 );
 
             solver.Solve();
