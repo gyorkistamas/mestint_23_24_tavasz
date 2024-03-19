@@ -58,5 +58,19 @@ namespace _02_EgyszemelyesJatekok.Interfaces
 
             return sb.ToString();
         }
+
+        public bool HasLoop()
+        {
+            Node temp = Parent;
+            while (temp != null)
+            {
+                if (temp.Equals(this))
+                    return true;
+
+                temp = temp.Parent;
+            }
+
+            return false;
+        }
     }
 }
