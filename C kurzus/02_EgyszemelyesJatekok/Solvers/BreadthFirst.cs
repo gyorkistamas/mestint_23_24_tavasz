@@ -48,7 +48,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
         {
             Path = null;
             // Addig megyünk, amíg van nyílt csomópont (tehát amíg nem tártuk fel az össze csomópontot, a.k.a a gráfot)
-            while (OpenNodes.Count > 0)
+            while ( OpenNodes.Count > 0 )
             {
                 // Kivesszük a legkisebb mélységűt
                 CurrentNode = OpenNodes.Dequeue();
@@ -61,7 +61,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
                     break;
                 }
                 // Kiterjesztés: operátort választunk, tesszük ezt addig, amíg van alkalmazható operátor
-                Operator selectedOperator = SelectOperator();
+                Operator  selectedOperator = SelectOperator();
                 while (selectedOperator != null)
                 {
                     // Létrehozzuk az új csomópontot
@@ -78,7 +78,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
             }
             if (Path == null)
             {
-                Console.WriteLine("No solution found!");
+                Console.WriteLine("No  solution found!");
             }
             else
             {

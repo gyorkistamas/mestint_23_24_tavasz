@@ -32,7 +32,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
         public Operator SelectOperator()
         {
             int index = CurrentNode.OperatorIndex++;
-            while(index < OperatorGenerator.Operators.Count)
+            while( index < OperatorGenerator.Operators.Count )
             {
                 if (OperatorGenerator.Operators[index].IsApplicable(CurrentNode.State))
                 {
@@ -54,7 +54,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
                 CurrentNode = OpenNodes.Pop();
                 // Kiválasztottuk kiterjesztésre, átrakjuk a zártak közé.
                 ClosedNodes.Add(CurrentNode);
-                Operator selectedOperator = SelectOperator();
+                Operator  selectedOperator = SelectOperator();
                 // Kiterjesztés: operátort választunk, tesszük ezt addig, amíg van alkalmazható operátor
                 while (selectedOperator != null)
                 {
@@ -77,7 +77,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
             }
             if (Path == null)
             {
-                Console.WriteLine("No solution found!");
+                Console.WriteLine("No  solution found!");
             }
             else
             {
