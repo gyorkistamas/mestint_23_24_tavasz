@@ -9,6 +9,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
 {
     public class BackTrackWithLoopCheck : Solver
     {
+        // Adatok eltárolása
         public Node CurrentNode { get; set; }
 
         public State StartingState { get; set; }
@@ -19,6 +20,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
             StartingState = startingState;
         }
 
+        // Következp operátor kiválasztása
         public Operator SelectOperator()
         {
             int index = CurrentNode.OperatorIndex++;
@@ -37,8 +39,10 @@ namespace _02_EgyszemelyesJatekok.Solvers
         public override void Solve()
         {
             CurrentNode = new Node(StartingState);
+            // Addig megyünk, amíg végig nem értünk a gráfon VAGY célállapotot nem találtunk.
             while (CurrentNode != null && !CurrentNode.IsTargetNode()) 
             {
+                // Kör ellenőrzés, visszalépés
                 if (CurrentNode.HasLoop())
                 {
                     CurrentNode = CurrentNode.Parent;

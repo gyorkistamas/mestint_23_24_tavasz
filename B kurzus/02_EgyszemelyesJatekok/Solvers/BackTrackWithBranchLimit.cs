@@ -10,6 +10,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
     public class BackTrackWithBranchLimit : Solver
     {
     
+        // Kezdeti limit, jelenlegi csomópont, keződállapot, célállapot, jelenlegi mélységi limit tárolása
         public int DepthLimit { get; set; }
         public Node CurrentNode { get; set; }
         public State StartingState { get; set; }
@@ -24,6 +25,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
             DepthLimit = depthLimit;
         }
 
+        // Következő operátor választása
         public Operator SelectOperator()
         {
             int index = CurrentNode.OperatorIndex++;
@@ -39,12 +41,16 @@ namespace _02_EgyszemelyesJatekok.Solvers
             return null;
         }
 
+        // Jelenlegi csomópont vizsgálata
         private void CheckCurrentNode()
         {
+            // Ha a csomópont célállapotot tartalmaz
             if (CurrentNode.IsTargetNode())
             {
+                // És ha még nincs megoldásunk, vagy ez a megoldás jobb
                 if (Path == null || Path.Depth > CurrentNode.Depth)
                 {
+                    // Akkro eltároljuk az állapotot és megnöveljük a limitet a csomópont értékére
                     Path = CurrentNode;
                     CurrentDepthLimit = CurrentNode.Depth;
                     CurrentNode = CurrentNode.Parent;
@@ -57,13 +63,17 @@ namespace _02_EgyszemelyesJatekok.Solvers
             CurrentDepthLimit = DepthLimit;
             Path = null;
             CurrentNode = new Node(StartingState);
+            // Addig megyünk amíg fel nem tártuk az egész gráfot: ha visszalépünk a kezdő csúcsból (tehát null lesz) jelenti azt, hogy véggimentünk a gráfon, mivel nincs több alkalmazható operátor.
             while(CurrentNode != null)
             {
+                // Körfigyelés, mélységvizsgálat
                 if (CurrentNode.HasLoop() || CurrentNode.Depth >= CurrentDepthLimit)
                 {
+                    // Visszalépés
                     CurrentNode = CurrentNode.Parent;
                     continue;
                 }
+                // Operátorválasztás, új csúcs létrehozása
                 Operator o = SelectOperator();
                 if (o != null)
                 {

@@ -9,6 +9,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
 {
     public class BackTrackWithDepthLimit : Solver
     {
+        // Szükséges adatok eltárolása
         public int DepthLimit { get; set; }
 
         public State StartingState { get; set; }
@@ -22,6 +23,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
             DepthLimit = depthLimit;
         }
 
+        // Következő operátor választása
         public Operator SelectOperator()
         {
             int index = CurrentNode.OperatorIndex++;
@@ -41,12 +43,15 @@ namespace _02_EgyszemelyesJatekok.Solvers
         public override void Solve()
         {
             CurrentNode = new Node(StartingState);
+            // Addig megyünk, amíg végig nem értünk a gráfon VAGY célállapotot nem találtunk.
             while(CurrentNode != null && !CurrentNode.IsTargetNode())
             {
+                // Mélységvizsgálat, visszalépés ha kell
                 if (CurrentNode.Depth >=  DepthLimit)
                 {
                     CurrentNode = CurrentNode.Parent;
                 }
+                // Követekző csomópont létrehozása
                 Operator o = SelectOperator();
                 if (o != null)
                 {

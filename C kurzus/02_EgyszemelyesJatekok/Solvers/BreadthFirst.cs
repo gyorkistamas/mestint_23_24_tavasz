@@ -67,7 +67,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
                     // Létrehozzuk az új csomópontot
                     State newState = selectedOperator.Apply(CurrentNode.State);
                     Node newNode = new Node(newState, CurrentNode);
-                    
+
                     // Ha még nem tártuk fel ezt a csomópontot, akkor hozzáadjuk a nyíltakhoz.
                     if (!OpenNodes.Contains(newNode) && !ClosedNodes.Contains(newNode))
                     {

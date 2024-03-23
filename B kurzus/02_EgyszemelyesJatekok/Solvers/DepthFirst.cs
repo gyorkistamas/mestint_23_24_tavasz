@@ -9,8 +9,10 @@ namespace _02_EgyszemelyesJatekok.Solvers
 {
     public class DepthFirst : Solver
     {
+        //Nyílt csomópontok
         public Stack<Node> OpenNodes { get; set; }
 
+        // Zárt csomópontok
         public List<Node> ClosedNodes { get; set; }
 
         public Node CurrentNode { get; set; }
@@ -26,6 +28,7 @@ namespace _02_EgyszemelyesJatekok.Solvers
             OpenNodes.Push(new Node(startingState));
         }
 
+        // Következő operátor választása
         public Operator SelectOperator()
         {
             int index = CurrentNode.OperatorIndex++;
@@ -44,20 +47,27 @@ namespace _02_EgyszemelyesJatekok.Solvers
         public override void Solve()
         {
             Path = null;
-            while(OpenNodes.Count > 0)
+            // Addig megyünk, amíg van nyílt csomópont (tehát amíg nem tártuk fel az össze csomópontot, a.k.a a gráfot)
+            while (OpenNodes.Count > 0)
             {
+                // Kivesszük a legnagyobb mélységűt
                 CurrentNode = OpenNodes.Pop();
+                // Kiválasztottuk kiterjesztésre, átrakjuk a zártak közé.
                 ClosedNodes.Add(CurrentNode);
                 Operator selectedOperator = SelectOperator();
-                while(selectedOperator != null)
+                // Kiterjesztés: operátort választunk, tesszük ezt addig, amíg van alkalmazható operátor
+                while (selectedOperator != null)
                 {
+                    // Létrehozzuk az új csomópontot
                     State newState = selectedOperator.Apply(CurrentNode.State);
                     Node newNode = new Node(newState, CurrentNode);
+                    // Megvizsgáljuk, hogy az újonnan létrejött csomópont célállapot-e, ha igen eltároljuk
                     if (newNode.IsTargetNode())
                     {
                         Path = newNode;
                         break;
                     }
+                    // Ha még nem tártuk fel ezt a csomópontot, akkor hozzáadjuk a nyíltakhoz.
                     if (!OpenNodes.Contains(newNode) && !ClosedNodes.Contains(newNode))
                     {
                         OpenNodes.Push(newNode);
