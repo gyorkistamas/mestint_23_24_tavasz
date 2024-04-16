@@ -123,8 +123,8 @@ namespace _03_KetszemelyesJatekok.StateRepresentations.TicTacToe
 
             for (int i = 0; i < 3; i++)
             {
-                if (Board[i, i] == diagonalChar) diagonalChar++;
-                if (Board[i, 2 - i] == sideDiagonalChar) sideDiagonalChar++;
+                if (Board[i, i] == diagonalChar) diagonalCount++;
+                if (Board[i, 2 - i] == sideDiagonalChar) sideDiagonalCount++;
             }
 
             if (diagonalCount == 3)
