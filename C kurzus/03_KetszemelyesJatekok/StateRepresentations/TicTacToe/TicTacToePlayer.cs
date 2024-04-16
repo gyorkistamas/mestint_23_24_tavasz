@@ -14,7 +14,7 @@ namespace _03_KetszemelyesJatekok.StateRepresentations.TicTacToe
 
         public TicTacToePlayer()
         {
-            solver = new TrialAndError(new TicTacToeOperatorGenerator());
+            solver = new MiniMax(new TicTacToeOperatorGenerator(), 20);
         }
 
         public void Play()

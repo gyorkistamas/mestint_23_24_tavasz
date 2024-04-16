@@ -24,6 +24,7 @@ namespace _03_KetszemelyesJatekok.Interfaces
             State = state;
             Depth = 0;
             OperatorIndex = 0;
+            Children = new List<Node>();
             if (parent != null)
                 Depth = Parent.Depth + 1;
         }
@@ -55,6 +56,33 @@ namespace _03_KetszemelyesJatekok.Interfaces
             sb.AppendLine(State.ToString());
             
             return sb.ToString();
+        }
+
+        public int GetHeuristics(char currentPlayer)
+        {
+            if (Children.Count == 0)
+            {
+                return State.GetHeuristics(currentPlayer);
+            }
+            return Children[0].GetHeuristics(currentPlayer);
+        }
+
+        public void SortChildrenMinimax(char currentPlayer, bool isCurrentPlayer = true)
+        {
+            foreach(Node node in Children)
+            {
+                node.SortChildrenMinimax(currentPlayer, !isCurrentPlayer);
+            }
+            if (isCurrentPlayer)
+            {
+                Children.Sort((x, y) =>
+                y.GetHeuristics(currentPlayer).CompareTo(x.GetHeuristics(currentPlayer)));
+            }
+            else
+            {
+                Children.Sort((x, y) =>
+                x.GetHeuristics(currentPlayer).CompareTo(y.GetHeuristics(currentPlayer)));
+            }
         }
     }
 }
