@@ -147,9 +147,113 @@ namespace _03_KetszemelyesJatekok.StateRepresentations.TicTacToe
             return Status.DRAW;
         }
 
+
+        private static int WIN = 100;
+
+        private static int DRAW = 50;
+
+        private static int LOSE = -100;
+
+        private static int POSSIBLE_WIN = 10;
+
+        private static int POSSIBLE_LOSE = -7;
+
+        private static int POSSIBLE_LOSE_AVOIDED = 5;
+
+        private static int NO_WINNING_START = -1;
+
         public override int GetHeuristics(char player)
         {
-            throw new NotImplementedException();
+            if (GetStatus() == Status.PLAYER1WINS && player == PLAYER1) return WIN;
+            if (GetStatus() == Status.PLAYER2WINS && player == PLAYER2) return WIN;
+
+            if (GetStatus() == Status.PLAYER1WINS && player != PLAYER1) return LOSE;
+            if (GetStatus() == Status.PLAYER2WINS && player != PLAYER2) return LOSE;
+
+            if (GetStatus() == Status.DRAW) return DRAW;
+
+            int result = 0;
+
+            char currentPlayer;
+            char otherPlayer;
+
+            if (player == PLAYER1)
+            {
+                currentPlayer = PLAYER1;
+                otherPlayer = PLAYER2;
+            }
+            else
+            {
+                currentPlayer = PLAYER2;
+                otherPlayer = PLAYER1;
+            }
+
+            int currentCount = 0;
+            int otherCount = 0;
+
+            for (int i = 0; i < 3; i++)
+            {
+                currentCount = 0;
+                otherCount = 0;
+
+                for (int j = 0; j < 3; j++)
+                {
+                    if (Board[i, j] == currentPlayer) currentCount++;
+                    if (Board[i, j] == otherPlayer) otherCount++;
+                }
+                result += CalculateHeuristic(currentCount, otherCount);
+
+                currentCount = 0;
+                otherCount = 0;
+
+                for (int j = 0; j < 3; j++)
+                {
+                    if (Board[j, i] == currentPlayer) currentCount++;
+                    if (Board[j, i] == otherPlayer) otherCount++;
+                }
+                result += CalculateHeuristic(currentCount, otherCount);
+
+            }
+
+            currentCount = 0;
+            otherCount = 0;
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (Board[i, i] == currentPlayer) currentCount++;
+                if (Board[i, i] == otherPlayer) otherCount++;
+            }
+
+            result += CalculateHeuristic(currentCount, otherCount);
+
+            currentCount = 0;
+            otherCount = 0;
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (Board[i, 2 - i] == currentPlayer) currentCount++;
+                if (Board[i, 2 -i] == otherPlayer) otherCount++;
+            }
+
+            result += CalculateHeuristic(currentCount, otherCount);
+
+            return result;
+
+        }
+
+        private int CalculateHeuristic(int currentCount, int otherCount)
+        {
+            int result = 0;
+
+            if (currentCount == 1 && otherCount == 2) result += POSSIBLE_LOSE_AVOIDED;
+
+            if (currentCount == 2 && otherCount == 0) result += POSSIBLE_WIN;
+
+            if (otherCount == 2 && currentCount == 0) result += POSSIBLE_LOSE;
+
+            if (otherCount == 1) result += NO_WINNING_START;
+
+            return result;
         }
     }
 }

@@ -58,5 +58,34 @@ namespace _03_KetszemelyesJatekok.Interfaces
             sb.AppendLine(State.ToString());
             return sb.ToString();
         }
+
+        public int GetHeuristics(char currentPlayer)
+        {
+            if (Children.Count == 0)
+            {
+                return State.GetHeuristics(currentPlayer);
+            }
+
+            return Children[0].GetHeuristics(currentPlayer);
+        }
+
+        public void SortChildrenMiniMax(char currentPlayer, bool isCurrentPlayer = true)
+        {
+            foreach(Node node in Children)
+            {
+                node.SortChildrenMiniMax(currentPlayer, !isCurrentPlayer);
+            }
+            if (isCurrentPlayer)
+            {
+                // Csökkenő sorrendbe rendezés, hogy a legnagyobb heursztikéval rendelkező állapot legyen elől
+                Children.Sort((x, y) =>
+                y.GetHeuristics(currentPlayer).CompareTo(x.GetHeuristics(currentPlayer)));
+            }
+            else
+            {
+                Children.Sort((x, y) =>
+                x.GetHeuristics(currentPlayer).CompareTo(y.GetHeuristics(currentPlayer)));
+            }
+        }
     }
 }
