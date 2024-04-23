@@ -50,6 +50,7 @@
             button0_0.TabIndex = 0;
             button0_0.Text = "Ü";
             button0_0.UseVisualStyleBackColor = true;
+            button0_0.Click += UserMoves;
             // 
             // button0_1
             // 
@@ -59,6 +60,7 @@
             button0_1.TabIndex = 1;
             button0_1.Text = "Ü";
             button0_1.UseVisualStyleBackColor = true;
+            button0_1.Click += UserMoves;
             // 
             // button0_2
             // 
@@ -68,6 +70,7 @@
             button0_2.TabIndex = 2;
             button0_2.Text = "Ü";
             button0_2.UseVisualStyleBackColor = true;
+            button0_2.Click += UserMoves;
             // 
             // button1_0
             // 
@@ -77,6 +80,7 @@
             button1_0.TabIndex = 3;
             button1_0.Text = "Ü";
             button1_0.UseVisualStyleBackColor = true;
+            button1_0.Click += UserMoves;
             // 
             // button1_1
             // 
@@ -86,6 +90,7 @@
             button1_1.TabIndex = 4;
             button1_1.Text = "Ü";
             button1_1.UseVisualStyleBackColor = true;
+            button1_1.Click += UserMoves;
             // 
             // button1_2
             // 
@@ -95,6 +100,7 @@
             button1_2.TabIndex = 5;
             button1_2.Text = "Ü";
             button1_2.UseVisualStyleBackColor = true;
+            button1_2.Click += UserMoves;
             // 
             // button2_0
             // 
@@ -104,6 +110,7 @@
             button2_0.TabIndex = 6;
             button2_0.Text = "Ü";
             button2_0.UseVisualStyleBackColor = true;
+            button2_0.Click += UserMoves;
             // 
             // button2_1
             // 
@@ -113,6 +120,7 @@
             button2_1.TabIndex = 7;
             button2_1.Text = "Ü";
             button2_1.UseVisualStyleBackColor = true;
+            button2_1.Click += UserMoves;
             // 
             // button2_2
             // 
@@ -122,6 +130,7 @@
             button2_2.TabIndex = 8;
             button2_2.Text = "Ü";
             button2_2.UseVisualStyleBackColor = true;
+            button2_2.Click += UserMoves;
             // 
             // buttonStart
             // 
