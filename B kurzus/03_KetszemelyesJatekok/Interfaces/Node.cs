@@ -66,7 +66,7 @@ namespace _03_KetszemelyesJatekok.Interfaces
                 return State.GetHeuristics(currentPlayer);
             }
 
-            return Children[0].GetHeuristics(currentPlayer);
+            return Children[0].GetHeuristics(currentPlayer) - Depth;
         }
 
         public void SortChildrenMiniMax(char currentPlayer, bool isCurrentPlayer = true)
@@ -86,6 +86,21 @@ namespace _03_KetszemelyesJatekok.Interfaces
                 Children.Sort((x, y) =>
                 x.GetHeuristics(currentPlayer).CompareTo(y.GetHeuristics(currentPlayer)));
             }
+        }
+
+        public int Count()
+        {
+
+            int count = 0;
+
+            foreach (Node node in Children)
+            {
+                count = count + node.Count();
+            }
+
+            count++;
+
+            return count;
         }
     }
 }
