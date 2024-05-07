@@ -24,7 +24,7 @@ namespace _03_KetszemelyesJatekok.Solvers
 
             ExtendNode(node);
 
-            node.SortChildrenMinimax(state.CurrentPlayer);
+            node.SortChildrenMiniMax(state.CurrentPlayer);
 
             return node.Children[0].State;
 

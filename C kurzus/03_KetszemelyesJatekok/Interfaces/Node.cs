@@ -64,14 +64,14 @@ namespace _03_KetszemelyesJatekok.Interfaces
             {
                 return State.GetHeuristics(currentPlayer);
             }
-            return Children[0].GetHeuristics(currentPlayer);
+            return Children[0].GetHeuristics(currentPlayer) - Depth;
         }
 
-        public void SortChildrenMinimax(char currentPlayer, bool isCurrentPlayer = true)
+        public void SortChildrenMiniMax(char currentPlayer, bool isCurrentPlayer = true)
         {
             foreach(Node node in Children)
             {
-                node.SortChildrenMinimax(currentPlayer, !isCurrentPlayer);
+                node.SortChildrenMiniMax(currentPlayer, !isCurrentPlayer);
             }
             if (isCurrentPlayer)
             {
